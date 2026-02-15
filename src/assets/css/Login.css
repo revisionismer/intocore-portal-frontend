@@ -1,0 +1,126 @@
+html, body {
+    height: 100%;                /* 화면 전체 높이 */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url("../img/login/login-bg.jpg");
+    background-size: cover;          /* 화면 꽉 채우기 */
+    background-position: center;     /* 중앙 기준 */
+    background-repeat: no-repeat;    /* 반복 제거 */
+}
+
+/* Login.css */
+#login-area {
+    width: 360px;                                 /* 조금 넓혀서 input 공간 확보 */
+    padding: 40px 30px;                           /* 내부 여백 늘려서 카드 느낌 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;                     /* 카드 배경 */
+    border-radius: 12px;                          /* 모서리 라운드 */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);    /* 그림자 */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* 사이트명 제목 h2 스타일 */
+#login-area h2 {
+    font-family: 'Jua', sans-serif;     /* 산뜻한 글꼴 */
+    font-size: 2.4rem;                  /* 크기 강조 */
+    font-weight: 700;                   /* 굵게 */
+    color: #1976d2;                   /* 연한 파랑 계열 */
+    text-align: center;                 /* 중앙 정렬 */
+    margin-bottom: 30px;                /* 아래 여백 */
+    letter-spacing: 1px;                /* 글자 사이 여유 */
+    text-transform: uppercase;          /* 대문자로 강조 (선택) */
+    line-height: 1.2;                   /* 높이 조절 */
+}
+  
+#login-area form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;                        /* 부모 로그인 박스 전체 너비 사용 */
+    max-width: 350px;                   /* 너무 커지지 않게 제한 */
+    margin: 0 auto;                     /* 가운데 정렬 */
+}
+
+#login-area form div {
+    display: flex;
+    align-items: center;                /* 수직 중앙 정렬 */
+    margin-bottom: 20px;
+}
+
+#login-area label {
+    width: 100px;                       /* 모든 라벨 동일 고정 너비 */
+    text-align: right;
+    margin-right: 8px;
+    font-weight: 500;
+    color: #333;
+}
+#login-area input {                     /* input: flex로 남은 공간 채우기 */
+    flex: 1;               
+    padding: 8px 10px;                  /* padding 약간 줄임 */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1.5rem;                  /* font-size 약간 줄임 */
+    transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+    background-color: #fafafa;
+}
+
+#login-area input:hover {
+    border-color: #64b5f6;
+    background-color: #f0f8ff;
+}
+
+#login-area input:focus {
+    border-color: #64b5f6;
+    box-shadow: 0 0 5px rgba(100,181,246,0.3);
+    background-color: #fff;
+    outline: none;
+}
+
+/* 버튼 영역 div */
+#button-area {
+    display: flex;                   /* 버튼을 가로로 배치 */
+    justify-content: space-between;  /* 버튼 좌우 간격 균등 */
+    margin-top: 25px;                /* 위쪽 여백 */
+    gap: 10px;                        /* 버튼 사이 간격 */
+}
+
+/* 버튼 공통 스타일 */
+#button-area button {
+    flex: 1;                        /* 버튼 동일 너비 */
+    padding: 8px 0;                  /* 기존 12px → 8px로 줄임 */
+    font-size: 1.4rem;               /* 기존 1.6rem → 1.4rem */
+    font-weight: 500;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* 로그인 버튼 스타일 */
+#button-area button:first-child {
+    background-color: #64b5f6;        /* 연한 파랑 */
+    color: #fff;
+}
+
+#button-area button:first-child:hover {
+    background-color: #42a5f5;
+    transform: translateY(-2px);      /* 살짝 올라가는 효과 */
+}
+
+/* 회원가입 버튼 스타일 */
+#button-area button:last-child {
+    background-color: #e0e0e0;        /* 연한 회색 */
+    color: #333;
+}
+
+#button-area button:last-child:hover {
+    background-color: #bdbdbd;
+    transform: translateY(-2px);      /* hover 시 약간 상승 */
+}

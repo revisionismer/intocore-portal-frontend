@@ -1,10 +1,7 @@
-html, body {
-    height: 100%;                /* 화면 전체 높이 */
-    margin: 0;
-    padding: 0;
-}
-
-body {
+#login-wrapper {
+    width: 100%;
+    min-height: 100vh;   /* 화면 전체 높이 확보 */
+   
     background-image: url("../img/login/login-bg.jpg");
     background-size: cover;          /* 화면 꽉 채우기 */
     background-position: center;     /* 중앙 기준 */

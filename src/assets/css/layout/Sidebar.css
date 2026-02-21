@@ -1,0 +1,56 @@
+/* Sidebar  */
+.sidebar {
+    width: 200px;                  /* 사이드 메뉴 넓이 */
+    height: 100vh;                 /* 화면 전체 높이 */
+    background-color: #f5f5f5;     /* 연한 회색 배경, Header와 통일 */
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;             /* Header 높이만큼 padding */
+    box-sizing: border-box;
+    position: fixed;               /* 화면 좌측에 고정 */
+    left: 0;
+    top: 0;
+    z-index: 100;                  /* Header보다 아래 */
+    overflow-y: auto;              /* 메뉴가 많으면 스크롤 */
+}
+
+/* 메뉴 리스트 */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* 메뉴 아이템 */
+.sidebar-menu li {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    color: #333;                   /* 텍스트 색상 */
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-menu li:hover {
+    background-color: #e0e0e0;     /* Hover 시 연한 회색 강조 */
+    color: #1976d2;                /* Hover 시 포인트 컬러 */
+    border-radius: 6px;
+}
+
+/* 메뉴 아이콘 있을 경우 */
+.sidebar-menu li i {
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+/* 선택된 메뉴 */
+.sidebar-menu li.active {
+    background-color: #d0d0d0;
+    color: #1976d2;
+    font-weight: 600;
+    border-radius: 6px;
+}

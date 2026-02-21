@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Login from './pages/Login';
+import Main from './pages/Main';
+import Header from './components/layout/Header';
+import Sidebar from './components/layout/Sidebar';
 
 function App() {
 
@@ -21,9 +24,9 @@ function App() {
 
     return (
         <>
-            <div id='main'>
-                <h3>메인페이지</h3>
-            </div>
+            <Header />
+            <Sidebar />
+            <Main />
         </>
     );
 }

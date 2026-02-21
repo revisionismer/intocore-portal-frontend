@@ -44,6 +44,12 @@
     margin: 0 auto;                     /* 가운데 정렬 */
 }
 
+#login-area form .error-text {
+    color: red;
+    font-size: 12px;
+    flex-basis: 100%;   /* 한 줄 전부 차지 */
+}
+
 #login-area form div {
     display: flex;
     align-items: center;                /* 수직 중앙 정렬 */
@@ -121,3 +127,4 @@
     background-color: #bdbdbd;
     transform: translateY(-2px);      /* hover 시 약간 상승 */
 }
+

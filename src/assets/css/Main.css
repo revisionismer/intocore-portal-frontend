@@ -1,0 +1,9 @@
+#main {
+    margin-left: 200px;   /* Sidebar 너비만큼 띄움 */
+    margin-top: 60px;     /* Header 높이만큼 띄움 */
+    padding: 20px;        /* 내부 여백 */
+    box-sizing: border-box;
+    min-height: calc(100vh - 60px); /* Header 높이 빼고 전체 높이 확보 */
+    background-color: #fafafa;      /* 연한 배경 */
+    overflow-y: auto;               /* 내용이 길면 스크롤 가능 */
+}

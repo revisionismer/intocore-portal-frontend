@@ -15,15 +15,9 @@ const Login = () => {
 
     const [errors, setErrors] = useState({});
 
-    
+
     // 1-1. 기본적으로 로그인 페이지에 들어오면 쿠키에 access_token이 있다면 삭제(페이지 로딩시 한 번 체크)
     useEffect(() => {
-
-        ACCESS_TOKEN = getCookie('access_token');
-
-        if(ACCESS_TOKEN) {
-            deleteCookie('access_token');
-        }
 
     }, []);
 
@@ -44,18 +38,11 @@ const Login = () => {
             // 1-2. 두번째 인자값 : headers 에 세팅할 값들 ex) content-type, media 방식 등
             {
                 headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Content-Type': 'application/json; charset=UTF-8'
                 }
             }
         ).then(function (res) {
             console.log(res);
-
-            // 1-3. response에서 가져온 값을 string으로 만들기 위해 앞에 "" 붙임
-            var responseHeader = "" + res.headers.get('authorization');
-
-            ACCESS_TOKEN = responseHeader.substring(7);
-
-            console.log("엑세스 토큰 : " + ACCESS_TOKEN);
 
             navigate("/");
 
@@ -118,25 +105,6 @@ const Login = () => {
         setErrors({});
 
         return Object.keys(errors).length === 0;
-    }
-
-    function getCookie(key) {
-
-        let result = null;
-        let cookie = document.cookie.split(';');
-
-        cookie.some(function (item) {
-            item = item.replace(' ', '');
-
-            let dic = item.split('=');
-
-            if (key === dic[0]) {
-                result = dic[1];
-                return true;
-            }
-            return false;
-        });
-        return result;
     }
 
     function deleteCookie(key) {

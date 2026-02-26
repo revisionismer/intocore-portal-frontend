@@ -1,48 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, json, useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import Base64 from 'base-64';
+import axios from 'axios';
 
 import '../assets/css/Main.css';
 
 const Main = () => {
 
-    var ACCESS_TOKEN = getCookie('access_token');
+    const navigate = useNavigate();
 
-    function getCookie(key) {
+    const [user, setUser] = useState([]);
 
-        let result = null;
-        let cookie = document.cookie.split(';');
+    useEffect(() => {
 
-        cookie.some(function (item) {
-            item = item.replace(' ', '');
+        const getUser = async () => {
+            // 2026-02-26 : ip정보를 따로 적지 말고 package.json에서 설정된 proxy로 자동으로 찾아가게 하자.
+            axios.get(`/api/users/s/info`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    },
+                    withCredentials: true
+                }
+            ).then(function (res) {
 
-            let dic = item.split('=');
+                console.log(res);
 
-            if (key === dic[0]) {
-                result = dic[1];
-                return true;
-            }
-            return false;
-        });
-        return result;
-    }
 
-    let payload;
-    let loginUser;
-    let userId;
+            }).catch(function (res) {
+                console.log(res);
 
-    if (ACCESS_TOKEN != null) {
-        payload = ACCESS_TOKEN.substring(ACCESS_TOKEN.indexOf('.') + 1, ACCESS_TOKEN.lastIndexOf('.'));
-        loginUser = JSON.parse(Base64.decode(payload));
-        userId = loginUser.id;
-    }
+                if (res.code === "ERR_NETWORK") {
+                    alert("서버와의 연결이 되어있지 않습니다.");
+                    navigate("/login");
+                    return false;
+
+                }
+
+                if (res.response.status === 400 || res.response.status === 401 || res.response.status === 403) {
+                    // 2024-03-28 : alert가 두번씩 호출됨 고민해봐야함 : index.js에서 문제됨
+                    alert(res.response.data.message);
+
+                    // 2024-04-12 : 무슨 이유인지 GET 방식에서는 403일때 서버에서 쿠키 삭제가 안되어 클라이언트 단에서 직접 삭제
+                    deleteCookie('access_token');
+                    navigate("/login");
+                    return;
+                }
+            })
+        }
+
+        getUser();
+    }, [])
 
     function deleteCookie(key) {
         document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
-
-    console.log(ACCESS_TOKEN);
 
     return (
         <div id='main'>

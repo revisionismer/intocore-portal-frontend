@@ -8,19 +8,28 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    var ACCESS_TOKEN = "";
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const [errors, setErrors] = useState({});
 
-
-    // 1-1. 기본적으로 로그인 페이지에 들어오면 쿠키에 access_token이 있다면 삭제(페이지 로딩시 한 번 체크)
     useEffect(() => {
+    
+        axios.get("/api/auth/me", { withCredentials: true })
+            .then(function (res) {
+                console.log(res);
 
+                if(res.data.code === 1) {
+                    doLogout();
+                }
+
+            }).catch(function (err) {
+                console.log(err.response?.data);
+            });
+        
     }, []);
 
+    // 1-1. 기본적으로 로그인 페이지에 들어오면 쿠키에 access_token이 있다면 삭제(페이지 로딩시 한 번 체크)
     function doLogin() {
 
         if (!loginValidationChk(username, password)) return;
@@ -56,6 +65,28 @@ const Login = () => {
 
             alert(res.response.data.message);
             return;
+        })
+    }
+
+    function doLogout() {
+        axios.post('/logout',
+            // 1-1. 첫번째 인자 값 : 서버로 보낼 데이터
+            null,
+            // 1-2. 두번째 인자값 : headers 에 세팅할 값들 ex) content-type, media 방식 등
+            {
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                withCredentials: true
+            }
+        ).then(function (res) {
+            console.log(res);
+
+            navigate("/login");
+
+        }).catch(function (res) {
+            console.log(res);
+            
         })
     }
 
@@ -105,10 +136,6 @@ const Login = () => {
         setErrors({});
 
         return Object.keys(errors).length === 0;
-    }
-
-    function deleteCookie(key) {
-        document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
     return (

@@ -42,7 +42,6 @@ const Main = () => {
                     alert(res.response.data.message);
 
                     // 2024-04-12 : 무슨 이유인지 GET 방식에서는 403일때 서버에서 쿠키 삭제가 안되어 클라이언트 단에서 직접 삭제
-                    deleteCookie('access_token');
                     navigate("/login");
                     return;
                 }
@@ -51,10 +50,6 @@ const Main = () => {
 
         getUser();
     }, [])
-
-    function deleteCookie(key) {
-        document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
 
     return (
         <div id='main'>

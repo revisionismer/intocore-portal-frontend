@@ -26,7 +26,10 @@ function App() {
         <>
             <Header />
             <Sidebar />
-            <Main />
+            <Routes>
+                <Route path='/*' element={<Main />} />
+            </Routes>
+            
         </>
     );
 }

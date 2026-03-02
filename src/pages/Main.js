@@ -33,8 +33,14 @@ const Main = () => {
                 if (res.code === "ERR_NETWORK") {
                     alert("서버와의 연결이 되어있지 않습니다.");
                     navigate("/login");
-                    return false;
+                    return;
 
+                }
+
+                if (res.response.status === 500) {
+                    alert(res.response.statusText);
+                    navigate("/login");
+                    return;
                 }
 
                 if (res.response.status === 400 || res.response.status === 401 || res.response.status === 403) {

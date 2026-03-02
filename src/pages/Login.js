@@ -14,19 +14,22 @@ const Login = () => {
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-    
-        axios.get("/api/auth/me", { withCredentials: true })
-            .then(function (res) {
-                console.log(res);
 
-                if(res.data.code === 1) {
-                    doLogout();
-                }
+        axios.get("/api/auth/me",
+            {
+                withCredentials: true
+            }
+        ).then(function (res) {
+            console.log(res);
 
-            }).catch(function (err) {
-                console.log(err.response?.data);
-            });
-        
+            if (res.data.code === 1) {
+                doLogout();
+            }
+
+        }).catch(function (err) {
+            console.log(err.response?.data);
+        });
+
     }, []);
 
     // 1-1. 기본적으로 로그인 페이지에 들어오면 쿠키에 access_token이 있다면 삭제(페이지 로딩시 한 번 체크)
@@ -86,7 +89,7 @@ const Login = () => {
 
         }).catch(function (res) {
             console.log(res);
-            
+
         })
     }
 

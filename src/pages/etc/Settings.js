@@ -3,7 +3,7 @@ import React from 'react';
 const Settings = () => {
     return (
         <>
-            <div>셋팅 페이지</div>   
+            <div id='main'>셋팅 페이지</div>
         </>
     );
 };

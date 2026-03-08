@@ -54,3 +54,13 @@
     font-weight: 600;
     border-radius: 6px;
 }
+
+
+
+/* 사이드바 아이콘 크기 지정 */
+.menu-icon {
+    width:20px;
+    height:20px;
+    margin-right:10px;
+    object-fit:contain;
+}

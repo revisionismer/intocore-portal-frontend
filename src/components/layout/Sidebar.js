@@ -1,6 +1,11 @@
 import React from 'react';
 
-import '../../assets/css/layout/Sidebar.css';
+import '../../assets/css/layout/sidebar.css';
+
+import homeIcon from '../../assets/img/icons/home.png';
+import docIcon from '../../assets/img/icons/doc.png';
+import settingsIcon from '../../assets/img/icons/settings.png';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     return (
@@ -8,16 +13,22 @@ const Sidebar = () => {
             <div className="sidebar">
                 <ul className="sidebar-menu">
                     <li>
-                        <i className="icon-home"></i>
-                        대시보드
+                        <Link to={'/home'}>
+                            <img src={homeIcon} className="menu-icon" />
+                            홈
+                        </Link>
                     </li>
                     <li>
-                        <i className="icon-chart"></i>
-                        모니터링
+                        <Link to={'/board'}>
+                            <img src={docIcon} className="menu-icon" />
+                            게시판
+                        </Link>
                     </li>
                     <li>
-                        <i className="icon-settings"></i>
-                        설정
+                        <Link to={'/settings'}>
+                            <img src={settingsIcon} className="menu-icon" />
+                            설정
+                        </Link>
                     </li>
                 </ul>
             </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate, json, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import '../assets/css/Login.css';
+import '../assets/css/login.css';
 
 const Login = () => {
 
@@ -15,19 +15,20 @@ const Login = () => {
 
     useEffect(() => {
 
-        axios.get("/api/auth/me",
+        axios.get("/api/users/auth/me",
             {
                 withCredentials: true
             }
         ).then(function (res) {
-            console.log(res);
 
             if (res.data.code === 1) {
                 doLogout();
             }
 
         }).catch(function (err) {
-            console.log(err.response?.data);
+            if (err.response?.status !== 401) {
+                console.log(err.response?.data);
+            }
         });
 
     }, []);
@@ -141,6 +142,10 @@ const Login = () => {
         return Object.keys(errors).length === 0;
     }
 
+    function goSignInPage() {
+        navigate("/signin");
+    }
+
     return (
         <>
             <div id='login-wrapper'>
@@ -167,7 +172,7 @@ const Login = () => {
 
                     <div id="button-area">
                         <button type="button" onClick={() => doLogin()}>로그인</button>
-                        <button type="button" onClick={null}>회원가입</button>
+                        <button type="button" onClick={() => goSignInPage()}>회원가입</button>
                     </div>
                 </div>
             </div>

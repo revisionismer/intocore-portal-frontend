@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../assets/css/layout/sidebar.css';
+import '../../assets/css/layout/Sidebar.css';
 
 import homeIcon from '../../assets/img/icons/home.png';
 import docIcon from '../../assets/img/icons/doc.png';

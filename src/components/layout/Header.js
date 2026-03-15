@@ -3,7 +3,7 @@ import { Link, Navigate, json, useLocation, useNavigate, useParams } from 'react
 
 import axios from 'axios';
 import Avatar from '../../assets/img/layout/Avatar.png';
-import '../../assets/css/layout/header.css';
+import '../../assets/css/layout/Header.css';
 
 const Header = () => {
 
@@ -53,7 +53,24 @@ const Header = () => {
             })
         }
 
-        getUser();
+        // 2026-03-15 : 헤더에서는 auth/me로 서버가 켜져있을때만 getUser()호출하게 변경
+        axios.get("/api/users/auth/me",
+            {
+                withCredentials: true
+            }
+        ).then(function (res) {
+
+            if (res.data.code === 1) {
+                getUser();
+            }
+            
+
+        }).catch(function (err) {
+            if (err.response?.status !== 401) {
+                console.log(err.response?.data);
+            }
+        });
+
     }, [])
 
     function doLogout() {

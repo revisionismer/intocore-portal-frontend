@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate, json, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import '../assets/css/login.css';
+import '../assets/css/Login.css';
 
 const Login = () => {
 
@@ -27,6 +27,7 @@ const Login = () => {
 
         }).catch(function (err) {
             if (err.response?.status !== 401) {
+                doLogout();
                 console.log(err.response?.data);
             }
         });

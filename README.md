@@ -8,4 +8,4 @@
 6. Login.js, Main.js에 로그인 여부 검증 로직 추가
 7. Header.js에 인증로직 추가 및 httpOnly cookie me 인증 확인 로직  추가
 8. 인증 예외처리 부분 보완
-
+9. Profile.js 생성 및 라우터 연결

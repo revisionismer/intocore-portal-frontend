@@ -8,6 +8,7 @@ import Sidebar from './components/layout/Sidebar';
 import Board from './pages/board/Board';
 import Settings from './pages/etc/Settings';
 import SignIn from './pages/SignIn';
+import Profile from './pages/etc/branch/Profile';
 
 function App() {
 
@@ -46,6 +47,8 @@ function App() {
                 <Route path='/home' element={<Main />} />
                 <Route path='/board' element={<Board />} />
                 <Route path='/settings' element={<Settings />} />
+
+                <Route path="/settings/profile" element={<Profile />} />
             </Routes>
 
         </>

@@ -18,7 +18,6 @@
 .logo {
     font-weight: 700;
     font-size: 1.2rem;
-    padding: 3px;
 }
   
 .search-box {
@@ -47,6 +46,36 @@
     display: flex;
     align-items: center;
     gap: 12px;
+
+    /* dropdown */
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    min-width: 120px;
+
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    padding: 4px 0; /* ❗ 위아래만 살림 */
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu div {
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+
+    margin: 0 4px; /* ❗ 좌우 여백으로 크기 유지 */
+}
+
+.dropdown-menu div:hover {
+    background-color: #f5f5f5;
 }
 
 .user-menu {
@@ -68,3 +97,18 @@
     font-size: 0.95rem;
     color: #333;
 }
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;           /* 이미지랑 이름 간격 */
+}
+
+.profileImg {
+    width: 32px;        /* 헤더용은 작게 */
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
+}
+

@@ -9,3 +9,5 @@
 7. Header.js에 인증로직 추가 및 httpOnly cookie me 인증 확인 로직  추가
 8. 인증 예외처리 부분 보완
 9. Profile.js 생성 및 라우터 연결
+10. 프로필 사진 업로드 Header.js와 Profile.js에 적용(Profile.js에서 바꾸면 Header도 동시에 바뀌게 App.js에서 로그인 user 공유하게 변경)
+

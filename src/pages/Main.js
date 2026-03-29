@@ -3,7 +3,7 @@ import { Link, Navigate, json, useLocation, useNavigate, useParams } from 'react
 
 import axios from 'axios';
 
-import '../assets/css/Main.css';
+import '../assets/css/main.css';
 
 const Main = () => {
 
@@ -56,52 +56,10 @@ const Main = () => {
         getUser();
     }, [])
 
-    function doLogout() {
-        axios.post('/logout',
-            // 1-1. 첫번째 인자 값 : 서버로 보낼 데이터
-            null,
-            // 1-2. 두번째 인자값 : headers 에 세팅할 값들 ex) content-type, media 방식 등
-            {
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8'
-                },
-                withCredentials: true
-            }
-        ).then(function (res) {
-            console.log(res);
-
-            navigate("/login");
-
-        }).catch(function (res) {
-            if (res.code === "ERR_NETWORK") {
-                alert("서버와의 연결이 되어있지 않습니다.");
-                navigate("/login");
-                return;
-
-            }
-
-            if (res.response.status === 500) {
-                alert(res.response.statusText);
-                navigate("/login");
-                return;
-            }
-
-            if (res.response.status === 400 || res.response.status === 401 || res.response.status === 403) {
-                // 2024-03-28 : alert가 두번씩 호출됨 고민해봐야함 : index.js에서 문제됨
-                alert(res.response.data.message);
-
-                // 2024-04-12 : 무슨 이유인지 GET 방식에서는 403일때 서버에서 쿠키 삭제가 안되어 클라이언트 단에서 직접 삭제
-                navigate("/login");
-                return;
-            }
-
-        })
-    }
-
     return (
         <div id='main'>
             <h3>메인페이지</h3>
-            <button id='logoutBtn' onClick={() => doLogout()}>로그아웃</button>
+          
         </div>
     );
 };

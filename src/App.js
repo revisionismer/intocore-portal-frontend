@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Login from './pages/Login';
 import Main from './pages/Main';
@@ -9,10 +8,24 @@ import Board from './pages/board/Board';
 import Settings from './pages/etc/Settings';
 import SignIn from './pages/SignIn';
 import Profile from './pages/etc/branch/Profile';
+import Password from './pages/etc/branch/Password';
+import Sample1 from './pages/etc/branch/Sample1';
+import Sample2 from './pages/etc/branch/Sample2';
 
 function App() {
 
     const { pathname } = useLocation();
+
+    const [user, setUser] = useState({
+        id: "",
+        name: "",
+        username: "",
+        gender: "",
+        phone: "",
+        profileImageUrl: "",
+        website: "",
+        bio: ""
+    }); 
 
     if (pathname === '/login') {
         return (
@@ -40,15 +53,20 @@ function App() {
 
     return (
         <>
-            <Header />
+            <Header user={user} setUser={setUser} />
             <Sidebar />
             <Routes>
                 <Route path='/*' element={<Main />} />
                 <Route path='/home' element={<Main />} />
                 <Route path='/board' element={<Board />} />
-                <Route path='/settings' element={<Settings />} />
 
-                <Route path="/settings/profile" element={<Profile />} />
+                <Route path='/settings' element={<Settings />} />
+                <Route path="/settings/profile" element={<Profile  user={user} setUser={setUser} />} />
+                <Route path="/settings/password" element={<Password />} />
+                <Route path="/settings/sample1" element={<Sample1 />} />
+                <Route path="/settings/sample2" element={<Sample2 />} />
+                
+
             </Routes>
 
         </>

@@ -1,0 +1,46 @@
+/* Settings 컨테이너 (Profile과 통일) */
+.settings-container {
+    max-width: 550px;
+    margin: 40px auto;
+    padding: 24px;
+    border-radius: 16px;
+
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== 메뉴 카드 ===== */
+.settings-menuList {
+    display: inline-block;
+    width: 90%;
+    margin: 6px;
+
+    padding: 18px;
+    border-radius: 12px;
+
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    text-align: center;
+}
+
+/* hover */
+.settings-menuList:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* 클릭 */
+.settings-menuList:active {
+    transform: scale(0.97);
+}

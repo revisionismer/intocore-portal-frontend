@@ -3,7 +3,7 @@ import { Link, Navigate, json, useLocation, useNavigate, useParams } from 'react
 
 import axios from 'axios';
 import Avatar from '../../assets/img/layout/Avatar.png';
-import '../../assets/css/layout/header.css';
+import '../../assets/css/layout/Header.css';
 
 const Header = ({ user, setUser }) => {
 

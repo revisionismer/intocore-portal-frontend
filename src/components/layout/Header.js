@@ -3,55 +3,17 @@ import { Link, Navigate, json, useLocation, useNavigate, useParams } from 'react
 
 import axios from 'axios';
 import Avatar from '../../assets/img/layout/Avatar.png';
-import '../../assets/css/layout/Header.css';
+import '../../assets/css/layout/header.css';
 
-const Header = () => {
+const Header = ({ user, setUser }) => {
 
     const navigate = useNavigate();
 
-    const [user, setUser] = useState([]);
+    // 2026-03-28 : 드롭다운 기능을 위해 추가
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
 
-        const getUser = async () => {
-            // 2026-02-26 : ip정보를 따로 적지 말고 package.json에서 설정된 proxy로 자동으로 찾아가게 하자.
-            axios.get(`/api/users/s/info`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json; charset=UTF-8'
-                    },
-                    withCredentials: true
-                }
-            ).then(function (res) {
-
-                setUser(res.data.data);
-
-            }).catch(function (res) {
-                console.log(res);
-
-                if (res.code === "ERR_NETWORK") {
-                    alert("서버와의 연결이 되어있지 않습니다.");
-                    navigate("/login");
-                    return;
-
-                }
-
-                if (res.response.status === 500) {
-                    alert(res.response.statusText);
-                    navigate("/login");
-                    return;
-                }
-
-                if (res.response.status === 400 || res.response.status === 401 || res.response.status === 403) {
-                    // 2024-03-28 : alert가 두번씩 호출됨 고민해봐야함 : index.js에서 문제됨
-                    alert(res.response.data.message);
-
-                    // 2024-04-12 : 무슨 이유인지 GET 방식에서는 403일때 서버에서 쿠키 삭제가 안되어 클라이언트 단에서 직접 삭제
-                    navigate("/login");
-                    return;
-                }
-            })
-        }
 
         // 2026-03-15 : 헤더에서는 auth/me로 서버가 켜져있을때만 getUser()호출하게 변경
         axios.get("/api/users/auth/me",
@@ -60,10 +22,7 @@ const Header = () => {
             }
         ).then(function (res) {
 
-            if (res.data.code === 1) {
-                getUser();
-            }
-            
+            setUser(res.data.data);
 
         }).catch(function (err) {
             if (err.response?.status !== 401) {
@@ -71,7 +30,7 @@ const Header = () => {
             }
         });
 
-    }, [])
+    }, []);
 
     function doLogout() {
         axios.post('/logout',
@@ -90,11 +49,41 @@ const Header = () => {
             navigate("/login");
 
         }).catch(function (res) {
-            console.log(res);
+            if (res.code === "ERR_NETWORK") {
+                alert("서버와의 연결이 되어있지 않습니다.");
+                navigate("/login");
+                return;
+
+            }
+
+            if (res.response.status === 500) {
+                alert(res.response.statusText);
+                navigate("/login");
+                return;
+            }
+
+            if (res.response.status === 400 || res.response.status === 401 || res.response.status === 403) {
+                // 2024-03-28 : alert가 두번씩 호출됨 고민해봐야함 : index.js에서 문제됨
+                alert(res.response.data.message);
+
+                // 2024-04-12 : 무슨 이유인지 GET 방식에서는 403일때 서버에서 쿠키 삭제가 안되어 클라이언트 단에서 직접 삭제
+                navigate("/login");
+                return;
+            }
 
         })
-    }
+    };
 
+    const getProfileImage = () => {
+        if (!user?.profileImageUrl) return Avatar;
+    
+        if (user.profileImageUrl.startsWith("data:")) {
+            return user.profileImageUrl;
+        }
+    
+        return `/thumnail/${user.profileImageUrl}`;
+    };
+    
     return (
         <>
             <header className="header">
@@ -105,10 +94,24 @@ const Header = () => {
                     <input type="text" placeholder="검색..." />
                 </div>
                 <div className="user-area">
-                    <div className="user-menu">
-                        <img src={Avatar} alt="avatar" className="avatar" />
+                    <div className="user-menu" onClick={() => setIsOpen(!isOpen)}>
+                        <img src={getProfileImage()} alt="profileImg" className="profileImg" />
                         <span className="username">{user ? user.username : 'Anomymous'}</span>
                     </div>
+
+                {isOpen && (
+                    <div className="dropdown-menu">
+                        <div onClick={() => {
+                            navigate("/settings/profile"); 
+                            setIsOpen(false);
+                        }}>프로필</div>
+                        <div onClick={() => {
+                            navigate("/settings");
+                            setIsOpen(false);
+                        }}>설정</div>
+                        <div onClick={doLogout}>로그아웃</div>
+                    </div>
+                )}
                 </div>
             </header>
         </>

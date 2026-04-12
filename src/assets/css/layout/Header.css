@@ -16,16 +16,33 @@
 }
   
 .logo {
+    display: flex;
+    align-items: center; 
+    width: 180px; /* sidebar랑 동일 */
+    height: 100%; /* 🔥 이게 핵심 */
     font-weight: 700;
     font-size: 1.2rem;
+
+    border-right: 1px solid #e0e0e0;
+    
+    
 }
   
 .search-box {
+    display: flex;             /* 가로 나란히 배치 */
+    align-items: center;       /* 세로 중앙 정렬 */
     flex: 1;
     max-width: 400px;
     margin: 0 20px;
 }
-  
+
+.search-box .search-icon {
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
+    margin-right: 8px; /* 🔑 아이콘과 input 사이 간격 */
+  }
+
 .search-box input {
     width: 100%;
     padding: 6px 12px;
@@ -46,6 +63,8 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    padding: 0 16px 0 20px;
+    height: 100%;
 
     /* dropdown */
     position: relative;

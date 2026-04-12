@@ -3,7 +3,9 @@ import { Link, Navigate, json, useLocation, useNavigate, useParams } from 'react
 
 import axios from 'axios';
 import Avatar from '../../assets/img/layout/Avatar.png';
-import '../../assets/css/layout/Header.css';
+import '../../assets/css/layout/header.css';
+
+import { Search } from 'react-bootstrap-icons';
 
 const Header = ({ user, setUser }) => {
 
@@ -76,14 +78,14 @@ const Header = ({ user, setUser }) => {
 
     const getProfileImage = () => {
         if (!user?.profileImageUrl) return Avatar;
-    
+
         if (user.profileImageUrl.startsWith("data:")) {
             return user.profileImageUrl;
         }
-    
+
         return `/thumnail/${user.profileImageUrl}`;
     };
-    
+
     return (
         <>
             <header className="header">
@@ -91,7 +93,8 @@ const Header = ({ user, setUser }) => {
                     <Link>PARK'S</Link>
                 </div>
                 <div className="search-box">
-                    <input type="text" placeholder="검색..." />
+                    <Search className="search-icon" />
+                    <input type="text" id='searchIcon' placeholder="검색..." />
                 </div>
                 <div className="user-area">
                     <div className="user-menu" onClick={() => setIsOpen(!isOpen)}>
@@ -99,19 +102,19 @@ const Header = ({ user, setUser }) => {
                         <span className="username">{user ? user.username : 'Anomymous'}</span>
                     </div>
 
-                {isOpen && (
-                    <div className="dropdown-menu">
-                        <div onClick={() => {
-                            navigate("/settings/profile"); 
-                            setIsOpen(false);
-                        }}>프로필</div>
-                        <div onClick={() => {
-                            navigate("/settings");
-                            setIsOpen(false);
-                        }}>설정</div>
-                        <div onClick={doLogout}>로그아웃</div>
-                    </div>
-                )}
+                    {isOpen && (
+                        <div className="dropdown-menu">
+                            <div onClick={() => {
+                                navigate("/settings/profile");
+                                setIsOpen(false);
+                            }}>프로필</div>
+                            <div onClick={() => {
+                                navigate("/settings");
+                                setIsOpen(false);
+                            }}>설정</div>
+                            <div onClick={doLogout}>로그아웃</div>
+                        </div>
+                    )}
                 </div>
             </header>
         </>

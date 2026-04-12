@@ -147,12 +147,19 @@ const Login = () => {
         navigate("/signin");
     }
 
+    /** 2026-04-04 : 엔터키 이벤트 핸들러 */
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            doLogin();
+        }
+    };
+
     return (
         <>
             <div id='login-wrapper'>
                 <div id='login-area'>
                     <h2>IntoCore</h2>
-                    <form>
+                    <form id='loginForm' onKeyDown={handleKeyDown}>
                         <div>
                             <label htmlFor='username'>아이디 : </label>
                             <input type='email' id='username' name='username' value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" />

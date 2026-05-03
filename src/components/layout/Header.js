@@ -90,7 +90,7 @@ const Header = ({ user, setUser }) => {
         <>
             <header className="header">
                 <div className="logo">
-                    <Link>PARK'S</Link>
+                    <Link to={'/'}>PARK'S</Link>
                 </div>
                 <div className="search-box">
                     <Search className="search-icon" />

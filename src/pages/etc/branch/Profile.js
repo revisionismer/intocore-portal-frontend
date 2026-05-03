@@ -17,6 +17,9 @@ const Profile = ({ user, setUser }) => {
         website: ""
     });
 
+    // 2026-05-02 : 비밀번호 상태 추가 (평문 그대로 서버로 전송)
+    const [password, setPassword] = useState("");
+
     // 2026-04-12 : 페이지 로딩시 파라미터로 user가 전달되어 user가 존재하면 user 객체를 form 객체에 복사
     useEffect(() => {
         if (user) {
@@ -46,11 +49,11 @@ const Profile = ({ user, setUser }) => {
             }
         });
 
-    }, [])
+    }, []);
 
     function profileImageUpload() {
 
-        // 1. 파일 선택창 열기
+        // 1-1. 파일 선택창 열기
         const input = document.getElementById("profile-img-input");
         input.click();
 
@@ -59,13 +62,13 @@ const Profile = ({ user, setUser }) => {
 
             console.log(f);
 
-            // 2. 이미지 체크
+            // 1-2. 이미지 체크
             if (!f.type.match("image.*")) {
                 alert("이미지를 등록해야 합니다.");
                 return;
             }
 
-            // 3. FormData 생성
+            // 1-3. FormData 생성
             const form = document.getElementById("userProfileImageForm");
             const formData = new FormData(form);
 
@@ -85,7 +88,7 @@ const Profile = ({ user, setUser }) => {
 
                 console.log(res.data);
 
-                // 4. 이미지 미리보기
+                // 1-4. 이미지 미리보기
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     document
@@ -99,8 +102,8 @@ const Profile = ({ user, setUser }) => {
                 };
                 reader.readAsDataURL(f);
 
-                // 5. 새로고침
-                //             location.reload();
+                // 1-5. 새로고침
+                // location.reload();
 
             } catch (error) {
                 console.log(error);
@@ -118,8 +121,52 @@ const Profile = ({ user, setUser }) => {
         return `/thumnail/${user.profileImageUrl}`;
     };
 
-    const doUpdateProfile = () => {
-        alert("수정");
+    const doUpdateProfile = (e) => {
+        const url = `/api/users/s/${user.id}/update`;
+
+        const updateProfileForm = {
+            ...userProfileForm,
+            password : password
+        }
+
+        console.log(updateProfileForm);
+
+        if(password == '') {
+            alert("비밀번호를 입력해주세요.");
+            document.querySelector("#password").focus();
+            return;
+        }
+
+        axios.put(url,
+            // 2-1. 첫번째 인자 값 : 서버로 보낼 데이터
+            JSON.stringify(updateProfileForm),
+            // 2-2. 두번째 인자값 : headers 에 세팅할 값들 ex) content-type, media 방식 등
+            {
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                withCredentials: true
+            }
+        ).then(function (res) {
+            console.log(res);
+
+            if(res.data.code === 1) {
+                document.querySelector("#password").value = '';
+                alert(res.data.message);
+            }
+
+        }).catch(function (res) {
+            console.log(res);
+            if (res.response.status === 500) {
+
+                alert(res.response.statusText);
+                return;
+            }
+
+            alert(res.response.data.message);
+            return;
+        })
+
     };
 
     return (
@@ -127,7 +174,9 @@ const Profile = ({ user, setUser }) => {
 
             {/* 프로필 영역 */}
             <div className="profile-container">
-
+                <input type="hidden" id='id' name='id' value={user.id} />
+                <input type="hidden" id='username' name='username' value={user.username} />
+                
                 <form id="userProfileImageForm">
                     <input type="file" className="my_hidden" id="profile-img-input" name="profileImageFile" />
                 </form>
@@ -151,7 +200,7 @@ const Profile = ({ user, setUser }) => {
 
                     <div className="form-group">
                         <label>비밀번호</label>
-                        <input type="password" id='password' name='password' placeholder="현재 비밀번호 입력" />
+                        <input type="password" id='password' name='password' placeholder="현재 비밀번호 입력" onChange={(e) => setPassword(e.target.value)}  />
                     </div>
 
                     <div className="form-group">

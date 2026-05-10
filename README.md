@@ -12,4 +12,4 @@
 10. 프로필 사진 업로드 Header.js와 Profile.js에 적용(Profile.js에서 바꾸면 Header도 동시에 바뀌게 App.js에서 로그인 user 공유하게 변경)
 11. Header.js, Main.js, Login.js Profile.js 보완
 12. 사용자 프로필 정보 업데이트 로직 추가
-
+13. SignUp.js UI 꾸며주고 회원가입 API 연동

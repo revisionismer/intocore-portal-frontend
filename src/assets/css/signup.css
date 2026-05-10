@@ -1,0 +1,159 @@
+#signup-wrapper {
+    width: 100%;
+    min-height: 100vh;   /* 화면 전체 높이 확보 */
+   
+    background-image: url("../img/login/login-bg.jpg");
+    background-size: cover;          /* 화면 꽉 채우기 */
+    background-position: center;     /* 중앙 기준 */
+    background-repeat: no-repeat;    /* 반복 제거 */
+}
+
+/* SignUp.css */
+/* SignUp.css */
+
+#signup-area {
+    width: 500px;
+    padding: 40px 35px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+
+    box-sizing: border-box;
+}
+
+/* 제목 */
+#signup-area h2 {
+    font-family: 'Jua', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1976d2;
+
+    text-align: center;
+    margin-bottom: 35px;
+
+    letter-spacing: 1px;
+}
+
+/* form */
+#signup-area form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* 입력 한 줄 */
+#signup-area form .form-group {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: center;
+    gap: 12px;
+}
+/* 라벨 */
+#signup-area label {
+    width: 110px;
+
+    margin-right: 12px;
+
+    text-align: center;
+
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+
+    flex-shrink: 0;
+}
+
+/* input */
+#signup-area input {
+    flex: 1;
+
+    padding: 12px 14px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    background-color: #fafafa;
+
+    font-size: 1rem;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+/* hover */
+#signup-area input:hover {
+    border-color: #64b5f6;
+    background-color: #f7fbff;
+}
+
+/* focus */
+#signup-area input:focus {
+    outline: none;
+
+    border-color: #42a5f5;
+    background-color: #fff;
+
+    box-shadow: 0 0 0 3px rgba(66,165,245,0.15);
+}
+
+/* 에러 메시지 */
+#signup-area .error-text {
+    margin-left: 122px;
+    margin-top: -10px;
+
+    font-size: 0.8rem;
+    color: red;
+}
+
+/* 버튼 영역 div */
+#button-area {
+    display: flex;                   /* 버튼을 가로로 배치 */
+    justify-content: space-between;  /* 버튼 좌우 간격 균등 */
+    margin-top: 25px;                /* 위쪽 여백 */
+    gap: 10px;                        /* 버튼 사이 간격 */
+}
+
+/* 버튼 공통 스타일 */
+#button-area button {
+    flex: 1;                        /* 버튼 동일 너비 */
+    padding: 8px 0;                  /* 기존 12px → 8px로 줄임 */
+    font-size: 1.4rem;               /* 기존 1.6rem → 1.4rem */
+    font-weight: 500;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* 로그인 버튼 스타일 */
+#button-area button:first-child {
+    background-color: #64b5f6;        /* 연한 파랑 */
+    color: #fff;
+}
+
+#button-area button:first-child:hover {
+    background-color: #42a5f5;
+    transform: translateY(-2px);      /* 살짝 올라가는 효과 */
+}
+
+/* 회원가입 버튼 스타일 */
+#button-area button:last-child {
+    background-color: #e0e0e0;        /* 연한 회색 */
+    color: #333;
+}
+
+#button-area button:last-child:hover {
+    background-color: #bdbdbd;
+    transform: translateY(-2px);      /* hover 시 약간 상승 */
+}
+

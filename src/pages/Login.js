@@ -37,7 +37,9 @@ const Login = () => {
     // 1-1. 기본적으로 로그인 페이지에 들어오면 쿠키에 access_token이 있다면 삭제(페이지 로딩시 한 번 체크)
     function doLogin() {
 
-        if (!loginValidationChk(username, password)) return;
+        if (!loginValidationChk(username, password)) {
+            return;
+        }
 
         var loginObject = {
             username: username,
@@ -143,8 +145,8 @@ const Login = () => {
         return Object.keys(errors).length === 0;
     }
 
-    function goSignInPage() {
-        navigate("/signin");
+    function goSignUpPage() {
+        navigate("/signup");
     }
 
     /** 2026-04-04 : 엔터키 이벤트 핸들러 */
@@ -180,7 +182,7 @@ const Login = () => {
 
                     <div id="button-area">
                         <button type="button" onClick={() => doLogin()}>로그인</button>
-                        <button type="button" onClick={() => goSignInPage()}>회원가입</button>
+                        <button type="button" onClick={() => goSignUpPage()}>회원가입</button>
                     </div>
                 </div>
             </div>

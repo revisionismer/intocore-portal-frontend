@@ -62,7 +62,7 @@ function App() {
 
                 <Route path='/settings' element={<Settings />} />
                 <Route path="/settings/profile" element={<Profile user={user} setUser={setUser} />} />
-                <Route path="/settings/password" element={<Password />} />
+                <Route path="/settings/password" element={<Password user={user} setUser={setUser} />} />
                 <Route path="/settings/sample1" element={<Sample1 />} />
                 <Route path="/settings/sample2" element={<Sample2 />} />
 

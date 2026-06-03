@@ -13,3 +13,5 @@
 11. Header.js, Main.js, Login.js Profile.js 보완
 12. 사용자 프로필 정보 업데이트 로직 추가
 13. SignUp.js UI 꾸며주고 회원가입 API 연동
+14. 사용자 비밀번호 변경 화면 추가 및 API 연동
+

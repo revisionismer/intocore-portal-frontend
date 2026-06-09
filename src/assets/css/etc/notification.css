@@ -1,0 +1,61 @@
+/* notification.css */
+.notification-container {
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 30px 24px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.notification-container h2 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.notification-container .description {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    color: #777;
+}
+
+.notification-container .setting-item {
+    margin-bottom: 12px;
+    display: flex;       /* 요소를 한 줄로 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+.notification-container .setting-item label {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #444;
+    cursor: pointer;
+}
+
+.notification-container .setting-item input {
+    margin-right: 12px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.notification-container .save-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: #2c3e50; /* 전문적인 느낌의 짙은 네이비/그레이 */
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.notification-container .save-btn:hover {
+    background-color: #34495e;
+}

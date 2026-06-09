@@ -14,7 +14,7 @@ const Settings = () => {
     const menuList = [
         { title: '계정 정보', path: '/settings/profile' },
         { title: '비밀번호 변경', path: '/settings/password' },
-        { title: '샘플1', path: '/settings/sample1' },
+        { title: '알림 설정', path: '/settings/notification' },
         { title: '샘플2', path: '/settings/sample2' },
     ];
 
@@ -22,12 +22,12 @@ const Settings = () => {
         <>
             <div id='main'>
                 <div className='settings-container'>
-                {menuList.map((menu, index) => (
-                    <div id='settings-menuList' className='settings-menuList' key={index} onClick={() => navigate(menu.path)}>
-                    {menu.title}
-                </div>
-                ))}
-             <Outlet />
+                    {menuList.map((menu, index) => (
+                        <div id='settings-menuList' className='settings-menuList' key={index} onClick={() => navigate(menu.path)}>
+                            {menu.title}
+                        </div>
+                    ))}
+                    <Outlet />
                 </div>
             </div>
         </>

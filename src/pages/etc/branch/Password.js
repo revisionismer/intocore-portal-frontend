@@ -10,7 +10,6 @@ const Password = ({ user, setUser }) => {
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordChk, setNewPasswordChk] = useState("");
 
-
     useEffect(() => {
 
 
@@ -21,25 +20,25 @@ const Password = ({ user, setUser }) => {
 
         console.log(url);
 
-        if(password == '') {
+        if (password == '') {
             alert("비밀번호를 입력해주세요.");
             document.querySelector("#password").focus();
             return;
         }
 
-        if(newPassword == '') {
+        if (newPassword == '') {
             alert("새 비밀번호를 입력해주세요.");
             document.querySelector("#newPassword").focus();
             return;
         }
 
-        if(newPasswordChk == '') {
+        if (newPasswordChk == '') {
             alert("새 비밀번호 확인을 입력해주세요.");
             document.querySelector("#newPasswordChk").focus();
             return;
         }
 
-        if(newPassword !== newPasswordChk) {
+        if (newPassword !== newPasswordChk) {
             alert("비밀번호가 서로 다릅니다.");
             document.querySelector("#newPassword").focus();
             document.querySelector("#newPassword").value = '';
@@ -48,9 +47,9 @@ const Password = ({ user, setUser }) => {
         }
 
         const updatePasswordForm = {
-            curPassword : password,
-            newPassword : newPassword,
-            newPasswordChk : newPasswordChk
+            curPassword: password,
+            newPassword: newPassword,
+            newPasswordChk: newPasswordChk
         }
 
         console.log(updatePasswordForm);
@@ -68,7 +67,7 @@ const Password = ({ user, setUser }) => {
         ).then(function (res) {
             console.log(res);
 
-            if(res.data.code === 1) {
+            if (res.data.code === 1) {
                 alert(res.data.message);
 
                 // 2026-05-14 : 비밀번호 변경 완료, 화면이동이던지 뭘 더 추가해줘야함
@@ -86,7 +85,7 @@ const Password = ({ user, setUser }) => {
             alert(res.response.data.message);
             return;
         })
-    } 
+    }
 
     return (
         <div id='main'>
@@ -96,9 +95,9 @@ const Password = ({ user, setUser }) => {
                 <div className="form-group">
                     <label>현재 비밀번호</label>
 
-                    <input type="password" id='password' name='password' placeholder="현재 비밀번호 입력" onChange={(e) => setPassword(e.target.value)}  />
+                    <input type="password" id='password' name='password' placeholder="현재 비밀번호 입력" onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <br/>
+                <br />
 
                 <div className="form-group">
                     <label>새 비밀번호</label>
@@ -111,7 +110,7 @@ const Password = ({ user, setUser }) => {
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
                 </div>
-                <br/>
+                <br />
 
                 <div className="form-group">
                     <label>비밀번호 확인</label>
@@ -124,18 +123,18 @@ const Password = ({ user, setUser }) => {
                         onChange={(e) => setNewPasswordChk(e.target.value)}
                     />
                 </div>
-                <br/>
+                <br />
 
                 <button type="button"
                     id="passwordSaveBtn"
                     className="save-button"
                     onClick={() => doUpdatePassword()}
                 >
-                비밀번호 변경
+                    비밀번호 변경
                 </button>
 
             </div>
-            
+
 
         </div>
     );

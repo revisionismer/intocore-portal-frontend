@@ -15,7 +15,7 @@ const Settings = () => {
         { title: '계정 정보', path: '/settings/profile' },
         { title: '비밀번호 변경', path: '/settings/password' },
         { title: '알림 설정', path: '/settings/notification' },
-        { title: '샘플2', path: '/settings/sample2' },
+        { title: '접속 기록', path: '/settings/logs' },
     ];
 
     return (

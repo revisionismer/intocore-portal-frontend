@@ -10,7 +10,7 @@ import SignUp from './pages/SignUp';
 import Profile from './pages/etc/branch/Profile';
 import Password from './pages/etc/branch/Password';
 import Notification from './pages/etc/branch/Notification';
-import Sample2 from './pages/etc/branch/Sample2';
+import Logs from './pages/etc/branch/Logs';
 
 function App() {
 
@@ -64,7 +64,7 @@ function App() {
                 <Route path="/settings/profile" element={<Profile user={user} setUser={setUser} />} />
                 <Route path="/settings/password" element={<Password user={user} setUser={setUser} />} />
                 <Route path="/settings/notification" element={<Notification user={user} setUser={setUser} />} />
-                <Route path="/settings/sample2" element={<Sample2 />} />
+                <Route path="/settings/logs" element={<Logs user={user} setUser={setUser} />} />
 
 
             </Routes>

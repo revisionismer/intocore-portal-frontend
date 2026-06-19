@@ -1,0 +1,67 @@
+/* 컨테이너 전체 여백 */
+.login-logs-container {
+    padding: 40px;
+    max-width: 1100px;
+    /* 너무 넓지 않게 설정 */
+}
+
+/* 헤더 영역 */
+.logs-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+}
+
+.logs-header h1 {
+    font-size: 24px;
+    color: #333;
+    margin: 0 0 10px 0;
+}
+
+.logs-header p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* 테이블 스타일 */
+.logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* 테두리 겹침 방지 */
+    margin-top: 10px;
+}
+
+.logs-table th {
+    background-color: #f8f9fa;
+    /* 연한 그레이 배경으로 헤더 강조 */
+    color: #555;
+    font-weight: 600;
+    padding: 15px;
+    text-align: center;
+
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+
+
+}
+
+.logs-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* 행에 마우스 올렸을 때 효과 (ERP의 기본) */
+.logs-table tbody tr:hover {
+    background-color: #f1f7ff;
+    transition: background-color 0.2s;
+}
+
+/* 데이터 없음 안내 */
+.no-data {
+    text-align: center;
+    padding: 40px !important;
+    color: #999;
+}

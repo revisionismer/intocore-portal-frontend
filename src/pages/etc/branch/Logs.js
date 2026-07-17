@@ -45,6 +45,7 @@ const Logs = ({ user, setUser }) => {
                         <tr>
                             <th>일시</th>
                             <th>로그인 IP</th>
+                            <th>아이디</th>
                             <th>국가</th>
                             <th>기기</th>
                         </tr>
@@ -56,6 +57,7 @@ const Logs = ({ user, setUser }) => {
                                 <tr key={log.id}>
                                     <td>{log.createdDate}</td>
                                     <td>{log.ip}</td>
+                                    <td>{log.username}</td>
                                     <td>{log.country}</td>
                                     <td>{log.device}</td>
                                 </tr>

@@ -64,7 +64,7 @@ const Logs = ({ user, setUser }) => {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="4" className="no-data">최근 접속 기록이 없습니다.</td>
+                                <td colSpan="5" className="no-data">최근 접속 기록이 없습니다.</td>
                             </tr>
                         )}
 

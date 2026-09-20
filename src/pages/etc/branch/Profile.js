@@ -44,8 +44,39 @@ const Profile = ({ user, setUser }) => {
             setUser(res.data.data);
 
         }).catch(function (err) {
-            if (err.response?.status !== 401) {
-                console.log(err.response?.data);
+            const status = err.response?.status;
+            const message = err.response?.data?.message;
+
+            // 응답 자체가 없음: 서버 다운, 네트워크 오류
+            if (!err.response) {
+                alert("서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.");
+                return;
+            }
+
+            // 400: 입력값 오류, 업무 오류 → alert만
+            if (status === 400) {
+                alert(message || "요청 내용을 확인해 주세요.");
+                return;
+            }
+
+            // 401: 세션 만료, 로그아웃 → alert + 로그인 이동
+            if (status === 401) {
+                alert(message || "로그인이 필요합니다.");
+                navigate("/login");
+                return;
+            }
+
+            // 403: 권한 없음, 쿠키 없음 → alert + 로그인 이동
+            if (status === 403) {
+                alert(message || "로그인이 필요하거나 접근 권한이 없습니다.");
+                navigate("/login");
+                return;
+            }
+
+            if (status === 500) {
+                console.error("서버 오류:", err.response);
+                alert(message || "서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                return;
             }
         });
 
@@ -126,12 +157,12 @@ const Profile = ({ user, setUser }) => {
 
         const updateProfileForm = {
             ...userProfileForm,
-            password : password
+            password: password
         }
 
         console.log(updateProfileForm);
 
-        if(password == '') {
+        if (password == '') {
             alert("비밀번호를 입력해주세요.");
             document.querySelector("#password").focus();
             return;
@@ -150,21 +181,52 @@ const Profile = ({ user, setUser }) => {
         ).then(function (res) {
             console.log(res);
 
-            if(res.data.code === 1) {
+            if (res.data.code === 1) {
                 document.querySelector("#password").value = '';
                 alert(res.data.message);
             }
 
         }).catch(function (res) {
-            console.log(res);
-            if (res.response.status === 500) {
+            const status = err.response?.status;
+            const message = err.response?.data?.message;
 
-                alert(res.response.statusText);
+            // 응답 없음: 서버 다운, 네트워크 오류, 타임아웃
+            if (!err.response) {
+                console.error(err);
+                alert("서버와의 연결이 되어있지 않습니다.");
+                navigate("/login");
                 return;
             }
 
-            alert(res.response.data.message);
-            return;
+            // 400: 입력값 오류, 업무 오류 → alert만
+            if (status === 400) {
+                alert(message || "요청 내용을 확인해 주세요.");
+                return;
+            }
+
+            // 401, 403: 세션 만료, 권한 없음 → alert + 로그인 이동
+            if (status === 401 || status === 403) {
+                alert(message || "로그인이 필요합니다.");
+                navigate("/login");
+                return;
+            }
+
+            // 404
+            if (status === 404) {
+                alert(message || "요청한 정보를 찾을 수 없습니다.");
+                return;
+            }
+
+            // 500: 서버 오류 → alert만 (main이 안 뜨면 아래 navigate 주석을 풀어도 됩니다)
+            if (status === 500) {
+                console.error("서버 오류:", err.response);
+                alert(message || "서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                // navigate("/login");
+                return;
+            }
+
+            // 그 외 상태코드
+            alert(message || "요청을 처리하지 못했습니다.");
         })
 
     };
@@ -176,7 +238,7 @@ const Profile = ({ user, setUser }) => {
             <div className="profile-container">
                 <input type="hidden" id='id' name='id' value={user.id} />
                 <input type="hidden" id='username' name='username' value={user.username} />
-                
+
                 <form id="userProfileImageForm">
                     <input type="file" className="my_hidden" id="profile-img-input" name="profileImageFile" />
                 </form>
@@ -200,7 +262,7 @@ const Profile = ({ user, setUser }) => {
 
                     <div className="form-group">
                         <label>비밀번호</label>
-                        <input type="password" id='password' name='password' placeholder="현재 비밀번호 입력" onChange={(e) => setPassword(e.target.value)}  />
+                        <input type="password" id='password' name='password' placeholder="현재 비밀번호 입력" onChange={(e) => setPassword(e.target.value)} />
                     </div>
 
                     <div className="form-group">

@@ -15,8 +15,6 @@ const Header = ({ user, setUser }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-
-
         // 2026-03-15 : 헤더에서는 auth/me로 서버가 켜져있을때만 getUser()호출하게 변경
         axios.get("/api/users/auth/me",
             {

@@ -28,27 +28,46 @@ const Main = () => {
 
 
             }).catch(function (res) {
-                if (res.code === "ERR_NETWORK") {
+                const status = err.response?.status;
+                const message = err.response?.data?.message;
+
+                // 응답 없음: 서버 다운, 네트워크 오류, 타임아웃
+                if (!err.response) {
+                    console.error(err);
                     alert("서버와의 연결이 되어있지 않습니다.");
                     navigate("/login");
                     return;
-
                 }
 
-                if (res.response.status === 500) {
-                    alert(res.response.statusText);
+                // 400: 입력값 오류, 업무 오류 → alert만
+                if (status === 400) {
+                    alert(message || "요청 내용을 확인해 주세요.");
+                    return;
+                }
+
+                // 401, 403: 세션 만료, 권한 없음 → alert + 로그인 이동
+                if (status === 401 || status === 403) {
+                    alert(message || "로그인이 필요합니다.");
                     navigate("/login");
                     return;
                 }
 
-                if (res.response.status === 400 || res.response.status === 401 || res.response.status === 403) {
-                    // 2024-03-28 : alert가 두번씩 호출됨 고민해봐야함 : index.js에서 문제됨
-                    alert(res.response.data.message);
-
-                    // 2024-04-12 : 무슨 이유인지 GET 방식에서는 403일때 서버에서 쿠키 삭제가 안되어 클라이언트 단에서 직접 삭제
-                    navigate("/login");
+                // 404
+                if (status === 404) {
+                    alert(message || "요청한 정보를 찾을 수 없습니다.");
                     return;
                 }
+
+                // 500: 서버 오류 → alert만 (main이 안 뜨면 아래 navigate 주석을 풀어도 됩니다)
+                if (status === 500) {
+                    console.error("서버 오류:", err.response);
+                    alert(message || "서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                    // navigate("/login");
+                    return;
+                }
+
+                // 그 외 상태코드
+                alert(message || "요청을 처리하지 못했습니다.");
 
             })
         }

@@ -48,8 +48,33 @@ const Notification = ({ user, setUser }) => {
 
 
         }).catch(function (err) {
-            if (err.response?.status !== 401) {
-                console.log(err.response?.data);
+            const status = err.response?.status;
+            const message = err.response?.data?.message;
+
+            // 응답 자체가 없음: 서버 다운, 네트워크 오류
+            if (!err.response) {
+                alert("서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.");
+                return;
+            }
+
+            // 400: 입력값 오류, 업무 오류 → alert만
+            if (status === 400) {
+                alert(message || "요청 내용을 확인해 주세요.");
+                return;
+            }
+
+            // 401: 세션 만료, 로그아웃 → alert + 로그인 이동
+            if (status === 401) {
+                alert(message || "로그인이 필요합니다.");
+                navigate("/login");
+                return;
+            }
+
+            // 403: 권한 없음, 쿠키 없음 → alert + 로그인 이동
+            if (status === 403) {
+                alert(message || "로그인이 필요하거나 접근 권한이 없습니다.");
+                navigate("/login");
+                return;
             }
         });
 
@@ -84,15 +109,34 @@ const Notification = ({ user, setUser }) => {
             }
 
         }).catch(function (res) {
-            console.log(res);
-            if (res.response.status === 500) {
+            const status = err.response?.status;
+            const message = err.response?.data?.message;
 
-                alert(res.response.statusText);
+            // 응답 자체가 없음: 서버 다운, 네트워크 오류
+            if (!err.response) {
+                alert("서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.");
                 return;
             }
 
-            alert(res.response.data.message);
-            return;
+            // 400: 입력값 오류, 업무 오류 → alert만
+            if (status === 400) {
+                alert(message || "요청 내용을 확인해 주세요.");
+                return;
+            }
+
+            // 401: 세션 만료, 로그아웃 → alert + 로그인 이동
+            if (status === 401) {
+                alert(message || "로그인이 필요합니다.");
+                navigate("/login");
+                return;
+            }
+
+            // 403: 권한 없음, 쿠키 없음 → alert + 로그인 이동
+            if (status === 403) {
+                alert(message || "로그인이 필요하거나 접근 권한이 없습니다.");
+                navigate("/login");
+                return;
+            }
         })
 
     }

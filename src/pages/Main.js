@@ -27,7 +27,7 @@ const Main = () => {
                 console.log(res);
 
 
-            }).catch(function (res) {
+            }).catch(function (err) {
                 const status = err.response?.status;
                 const message = err.response?.data?.message;
 

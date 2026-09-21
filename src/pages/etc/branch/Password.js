@@ -76,7 +76,7 @@ const Password = ({ user, setUser }) => {
                 return;
             }
 
-        }).catch(function (res) {
+        }).catch(function (err) {
             const status = err.response?.status;
             const message = err.response?.data?.message;
 

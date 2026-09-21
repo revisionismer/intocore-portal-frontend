@@ -48,21 +48,21 @@ const Header = ({ user, setUser }) => {
 
             navigate("/login");
 
-        }).catch(function (res) {
-            if (res.code === "ERR_NETWORK") {
+        }).catch(function (err) {
+            if (err.code === "ERR_NETWORK") {
                 alert("서버와의 연결이 되어있지 않습니다.");
                 navigate("/login");
                 return;
 
             }
 
-            if (res.response.status === 500) {
+            if (err.response.status === 500) {
                 alert(res.response.statusText);
                 navigate("/login");
                 return;
             }
 
-            if (res.response.status === 400 || res.response.status === 401 || res.response.status === 403) {
+            if (err.response.status === 400 || err.response.status === 401 || res.response.status === 403) {
                 // 2024-03-28 : alert가 두번씩 호출됨 고민해봐야함 : index.js에서 문제됨
                 alert(res.response.data.message);
 

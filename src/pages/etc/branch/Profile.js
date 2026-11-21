@@ -206,7 +206,7 @@ const Profile = ({ user, setUser }) => {
 
             // 401, 403: 세션 만료, 권한 없음 → alert + 로그인 이동
             if (status === 401 || status === 403) {
-                alert(message || "로그인이 필요합니다.");
+                alert(status === 403 ? "로그인이 필요합니다." : (message || "로그인이 필요합니다."));
                 navigate("/login");
                 return;
             }
@@ -217,11 +217,11 @@ const Profile = ({ user, setUser }) => {
                 return;
             }
 
-            // 500: 서버 오류 → alert만 (main이 안 뜨면 아래 navigate 주석을 풀어도 됩니다)
+            // 500
             if (status === 500) {
                 console.error("서버 오류:", err.response);
                 alert(message || "서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
-                // navigate("/login");
+                navigate("/login");
                 return;
             }
 

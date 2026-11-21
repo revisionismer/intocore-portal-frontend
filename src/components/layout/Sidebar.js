@@ -5,6 +5,7 @@ import '../../assets/css/layout/sidebar.css';
 import homeIcon from '../../assets/img/icons/home.png';
 import docIcon from '../../assets/img/icons/doc.png';
 import settingsIcon from '../../assets/img/icons/settings.png';
+import infoIcon from '../../assets/img/icons/info.png';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -22,6 +23,12 @@ const Sidebar = () => {
                         <Link to={'/board'}>
                             <img src={docIcon} className="menu-icon" />
                             게시판
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to={'/info'}>
+                            <img src={infoIcon} className="menu-icon" />
+                            고객센터
                         </Link>
                     </li>
                     <li>

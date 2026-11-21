@@ -71,8 +71,8 @@ const Notification = ({ user, setUser }) => {
             }
 
             // 403: 권한 없음, 쿠키 없음 → alert + 로그인 이동
-            if (status === 403) {
-                alert(message || "로그인이 필요하거나 접근 권한이 없습니다.");
+            if (status === 401 || status === 403) {
+                alert(status === 403 ? "로그인이 필요합니다." : (message || "로그인이 필요합니다."));
                 navigate("/login");
                 return;
             }

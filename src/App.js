@@ -4,13 +4,21 @@ import Login from './pages/Login';
 import Main from './pages/Main';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
-import Board from './pages/board/Board';
-import Settings from './pages/etc/Settings';
+
 import SignUp from './pages/SignUp';
+
+import Board from './pages/board/Board';
+
+import Settings from './pages/etc/Settings';
 import Profile from './pages/etc/branch/Profile';
 import Password from './pages/etc/branch/Password';
 import Notification from './pages/etc/branch/Notification';
 import Logs from './pages/etc/branch/Logs';
+
+import Info from './pages/info/Info';
+import Faq from './pages/info/branch/Faq';
+import About from './pages/info/branch/About';
+import Location from './pages/info/branch/Location';
 
 function App() {
 
@@ -66,6 +74,10 @@ function App() {
                 <Route path="/settings/notification" element={<Notification user={user} setUser={setUser} />} />
                 <Route path="/settings/logs" element={<Logs user={user} setUser={setUser} />} />
 
+                <Route path='/info' element={<Info />} ></Route>
+                <Route path='/info/about' element={<About />} ></Route>
+                <Route path='/info/location' element={<Location />} ></Route>
+                <Route path='/info/faq' element={<Faq />} ></Route>
 
             </Routes>
 

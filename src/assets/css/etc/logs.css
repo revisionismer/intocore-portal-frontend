@@ -9,6 +9,12 @@
 .logs-header {
     margin-bottom: 30px;
     padding-bottom: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .logs-header h1 {
@@ -41,8 +47,6 @@
 
     border-top: 2px solid #ddd;
     border-bottom: 2px solid #ddd;
-
-
 }
 
 .logs-table td {
@@ -64,4 +68,63 @@
     text-align: center;
     padding: 40px !important;
     color: #999;
+}
+
+/* 우측 그래프 영역 (타이틀과 차트를 수직 정렬) */
+.logs-chart-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* 그래프 상단 타이틀 ("최근 접속 추이") */
+.logs-chart-title {
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+/* 미니 바 차트 컨테이너 (날짜가 들어갈 하단 여백을 위해 margin-bottom 추가) */
+.logs-mini-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    /* 막대 간격을 조금 넓혀서 날짜가 겹치지 않게 함 */
+    height: 35px;
+    margin-bottom: 22px;
+    /* 하단 날짜가 들어갈 공간 확보 */
+}
+
+/* 개별 막대 바 스타일 */
+.logs-bar {
+    width: 12px;
+    /* 폭을 조금 넓혀주면 날짜 배치하기 수월합니다 */
+    min-height: 4px;
+    background-color: #4f46e5;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+    position: relative;
+    /* 날짜를 바깥으로 빼기 위한 기준점 */
+}
+
+/* 막대에 마우스 올렸을 때의 인터랙션 효과 */
+.logs-bar:hover {
+    background-color: #4338ca;
+}
+
+/* 막대 바깥 하단에 위치할 날짜 스타일 */
+.logs-bar-date {
+    position: absolute;
+    bottom: -20px;
+    /* 막대 아래쪽으로 밀어내기 */
+    left: 50%;
+    transform: translateX(-50%);
+    /* 가로 중앙 정렬 */
+    font-size: 6px;
+    /* 너무 작으면 안 보이므로 9px 정도로 설정 */
+    color: #64748b;
+    /* 가독성 좋은 회색 톤 */
+    white-space: nowrap;
+    /* 줄바꿈 방지 */
 }
